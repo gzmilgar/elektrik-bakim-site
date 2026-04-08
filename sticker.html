@@ -9,778 +9,437 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
+            background: #0e0e18;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 30px 20px;
+            justify-content: center;
+            padding: 40px 20px;
         }
 
-        .page-title {
+        /* ===== CONTROLS ===== */
+        .controls {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .controls h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.6rem;
-            color: #1a1a2e;
-            margin-bottom: 8px;
-            text-align: center;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 6px;
         }
 
-        .page-subtitle {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
-            text-align: center;
+        .controls p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
 
         .print-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            gap: 10px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            margin-bottom: 30px;
             transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.3px;
         }
 
         .print-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 26, 46, 0.3);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
         }
 
-        .stickers-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        /* ===== STICKER CARD ===== */
+        /* ===== STICKER ===== */
         .sticker {
-            width: 370px;
-            background: white;
-            border-radius: 16px;
+            width: 420px;
+            background: #ffffff;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 20px 60px rgba(0,0,0,0.5),
+                0 0 120px rgba(255, 107, 53, 0.08);
             position: relative;
         }
 
+        /* -- Top accent stripe -- */
+        .sticker::before {
+            content: '';
+            display: block;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e, #ff6b35);
+        }
+
+        /* -- Header -- */
         .sticker-header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            padding: 20px 24px 16px;
+            background: linear-gradient(160deg, #1a1a2e 0%, #0f1a30 100%);
+            padding: 28px 32px 24px;
             position: relative;
             overflow: hidden;
         }
 
+        /* decorative circle */
         .sticker-header::after {
             content: '';
             position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 107, 53, 0.15);
+            top: -60px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
             border-radius: 50%;
         }
 
-        .sticker-logo {
+        .logo-row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 6px;
+            gap: 12px;
+            margin-bottom: 4px;
+            position: relative;
+            z-index: 1;
         }
 
-        .sticker-logo-icon {
-            width: 36px;
-            height: 36px;
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 16px rgba(255,107,53,0.35);
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .logo-text span { color: #ff6b35; }
+
+        .tagline {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+            padding-left: 56px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* -- Body -- */
+        .sticker-body {
+            padding: 28px 32px;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        /* QR section */
+        .qr-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qr-box {
+            width: 148px;
+            height: 148px;
+            background: #fff;
+            border: 2.5px solid #eaedf2;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            position: relative;
+        }
+
+        .qr-box canvas,
+        .qr-box img {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 8px;
+        }
+
+        /* small bolt overlay in center of QR */
+        .qr-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
             background: linear-gradient(135deg, #ff6b35, #f7931e);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.1rem;
-        }
-
-        .sticker-logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .sticker-logo-text span {
-            color: #ff6b35;
-        }
-
-        .sticker-tagline {
-            color: rgba(255,255,255,0.7);
             font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(255,107,53,0.4);
         }
 
-        .sticker-body {
-            padding: 20px 24px;
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .sticker-qr {
-            flex-shrink: 0;
-            width: 120px;
-            height: 120px;
-            background: white;
-            border: 2px solid #e8ecf1;
-            border-radius: 12px;
+        .scan-text {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #ff6b35;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 6px;
+            gap: 5px;
         }
 
-        .sticker-qr canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 6px;
-        }
+        .scan-text i { font-size: 0.72rem; }
 
-        .sticker-info {
+        /* Info section */
+        .info-section {
             flex: 1;
             min-width: 0;
         }
 
-        .sticker-info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .sticker-info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .sticker-info-item i {
-            color: #ff6b35;
-            font-size: 0.85rem;
-            margin-top: 3px;
-            flex-shrink: 0;
-            width: 16px;
-            text-align: center;
-        }
-
-        .sticker-info-item .info-text {
-            font-size: 0.8rem;
-            color: #333;
-            line-height: 1.4;
-        }
-
-        .sticker-info-item .info-text strong {
-            color: #1a1a2e;
-            font-weight: 600;
-        }
-
-        .sticker-footer {
-            background: #f8f9fb;
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid #e8ecf1;
-        }
-
-        .sticker-footer-text {
-            font-size: 0.7rem;
-            color: #888;
-        }
-
-        .sticker-scan-label {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.7rem;
-            color: #ff6b35;
-            font-weight: 600;
-        }
-
-        .sticker-scan-label i {
-            font-size: 0.75rem;
-        }
-
-        /* ===== STICKER VARIANT 2 - Compact horizontal ===== */
-        .sticker-compact {
-            width: 370px;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        }
-
-        .sticker-compact .compact-top {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .sticker-compact .compact-brand {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .sticker-compact .compact-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.95rem;
-        }
-
-        .sticker-compact .compact-name {
+        .person-name {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            color: white;
-        }
-
-        .sticker-compact .compact-name span {
-            color: #ff6b35;
-        }
-
-        .sticker-compact .compact-badge {
-            background: rgba(255, 107, 53, 0.2);
-            color: #ff6b35;
-            font-size: 0.65rem;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        .sticker-compact .compact-body {
-            padding: 16px 20px;
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .sticker-compact .compact-qr {
-            flex-shrink: 0;
-            width: 100px;
-            height: 100px;
-            border: 2px solid #e8ecf1;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px;
-        }
-
-        .sticker-compact .compact-qr canvas {
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 4px;
-        }
-
-        .sticker-compact .compact-details {
-            flex: 1;
-        }
-
-        .sticker-compact .compact-person {
-            font-weight: 700;
-            font-size: 0.95rem;
             color: #1a1a2e;
-            margin-bottom: 8px;
+            margin-bottom: 14px;
+            line-height: 1.2;
         }
 
-        .sticker-compact .compact-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 5px;
-            font-size: 0.78rem;
-            color: #555;
-        }
-
-        .sticker-compact .compact-row i {
-            color: #ff6b35;
-            width: 14px;
-            text-align: center;
-            font-size: 0.75rem;
-        }
-
-        .sticker-compact .compact-bottom {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .sticker-compact .compact-bottom span {
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .sticker-compact .compact-bottom i {
-            color: white;
-            font-size: 0.8rem;
-        }
-
-        /* ===== STICKER VARIANT 3 - Mini round ===== */
-        .sticker-mini {
-            width: 200px;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-
-        .sticker-mini .mini-header {
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            padding: 14px 16px 10px;
-        }
-
-        .sticker-mini .mini-logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .sticker-mini .mini-logo span {
-            color: #ff6b35;
-        }
-
-        .sticker-mini .mini-body {
-            padding: 16px;
-        }
-
-        .sticker-mini .mini-qr {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 12px;
-            border: 2px solid #e8ecf1;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px;
-        }
-
-        .sticker-mini .mini-qr canvas {
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        .sticker-mini .mini-phone {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #1a1a2e;
-            margin-bottom: 4px;
-        }
-
-        .sticker-mini .mini-label {
-            font-size: 0.7rem;
-            color: #ff6b35;
-            font-weight: 600;
-        }
-
-        .sticker-mini .mini-footer {
-            background: #ff6b35;
-            padding: 8px;
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        /* ===== STICKER VARIANT 4 - Wide banner ===== */
-        .sticker-banner {
-            width: 100%;
-            max-width: 770px;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-            display: flex;
-        }
-
-        .sticker-banner .banner-left {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-width: 280px;
-        }
-
-        .sticker-banner .banner-logo {
+        .info-row {
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 12px;
+            margin-bottom: 11px;
         }
 
-        .sticker-banner .banner-logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        .info-row:last-child { margin-bottom: 0; }
+
+        .info-icon {
+            width: 32px;
+            height: 32px;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.2rem;
+            font-size: 0.8rem;
+            flex-shrink: 0;
         }
 
-        .sticker-banner .banner-logo-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: white;
+        .info-icon.phone {
+            background: rgba(37, 211, 102, 0.1);
+            color: #25d366;
         }
 
-        .sticker-banner .banner-logo-text span {
+        .info-icon.whatsapp {
+            background: rgba(37, 211, 102, 0.1);
+            color: #25d366;
+        }
+
+        .info-icon.location {
+            background: rgba(255, 107, 53, 0.1);
             color: #ff6b35;
         }
 
-        .sticker-banner .banner-desc {
-            color: rgba(255,255,255,0.7);
-            font-size: 0.8rem;
-            line-height: 1.5;
-            margin-bottom: 16px;
+        .info-icon.service {
+            background: rgba(26, 26, 46, 0.08);
+            color: #1a1a2e;
         }
 
-        .sticker-banner .banner-services {
+        .info-text {
+            font-size: 0.82rem;
+            color: #444;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .info-text strong {
+            color: #1a1a2e;
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+
+        /* -- Footer -- */
+        .sticker-footer {
+            background: #f7f8fa;
+            border-top: 1px solid #eaedf2;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-services {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
         }
 
-        .sticker-banner .banner-service-tag {
-            background: rgba(255, 107, 53, 0.15);
-            color: #ff6b35;
-            font-size: 0.65rem;
+        .service-tag {
+            background: #1a1a2e;
+            color: #fff;
+            font-size: 0.6rem;
             font-weight: 600;
             padding: 4px 10px;
             border-radius: 20px;
+            letter-spacing: 0.3px;
         }
 
-        .sticker-banner .banner-center {
-            flex: 1;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .sticker-banner .banner-person {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #1a1a2e;
-            margin-bottom: 12px;
-        }
-
-        .sticker-banner .banner-contact-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
-            color: #444;
-        }
-
-        .sticker-banner .banner-contact-row i {
-            color: #ff6b35;
-            width: 16px;
-            text-align: center;
-        }
-
-        .sticker-banner .banner-right {
-            background: #f8f9fb;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-left: 1px solid #e8ecf1;
-        }
-
-        .sticker-banner .banner-qr {
-            width: 120px;
-            height: 120px;
-            border: 2px solid #e8ecf1;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px;
-            background: white;
-            margin-bottom: 8px;
-        }
-
-        .sticker-banner .banner-qr canvas {
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        .sticker-banner .banner-scan {
+        .footer-exp {
             font-size: 0.7rem;
+            font-weight: 700;
             color: #ff6b35;
-            font-weight: 600;
+            white-space: nowrap;
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
-        /* ===== PRINT STYLES ===== */
+        .footer-exp i { font-size: 0.65rem; }
+
+        /* ===== PRINT ===== */
         @media print {
             body {
                 background: white;
-                padding: 10mm;
+                padding: 0;
+                justify-content: flex-start;
+                padding-top: 15mm;
             }
 
-            .page-title,
-            .page-subtitle,
-            .print-btn,
-            .no-print {
-                display: none !important;
-            }
+            .controls { display: none !important; }
 
-            .stickers-container {
-                gap: 15mm;
-            }
-
-            .sticker,
-            .sticker-compact,
-            .sticker-mini,
-            .sticker-banner {
+            .sticker {
                 box-shadow: none;
-                border: 1px solid #ddd;
-                break-inside: avoid;
+                border: 1.5px solid #ccc;
             }
         }
 
-        @media (max-width: 800px) {
-            .stickers-container {
-                grid-template-columns: 1fr;
-                justify-items: center;
-            }
-
-            .sticker-banner {
-                flex-direction: column;
-            }
-
-            .sticker-banner .banner-left {
-                min-width: unset;
-            }
-
-            .sticker-banner .banner-right {
-                border-left: none;
-                border-top: 1px solid #e8ecf1;
-            }
+        @media (max-width: 480px) {
+            .sticker { width: 100%; border-radius: 18px; }
+            .sticker-header { padding: 22px 20px 18px; }
+            .sticker-body { padding: 20px; gap: 16px; flex-direction: column; align-items: center; }
+            .info-section { width: 100%; }
+            .sticker-footer { padding: 12px 20px; }
+            .tagline { padding-left: 0; margin-top: 8px; }
         }
     </style>
 </head>
 <body>
-    <h1 class="page-title">Reklam Sticker Tasarimlari</h1>
-    <p class="page-subtitle">QR kodu okutarak iletisim sayfasina ulasabilirsiniz. Yazdirilabilir tasarimlar.</p>
 
-    <button class="print-btn no-print" onclick="window.print()">
-        <i class="fas fa-print"></i>
-        Yazdir
-    </button>
-
-    <div class="stickers-container">
-        <!-- Sticker 1: Card style -->
-        <div class="sticker">
-            <div class="sticker-header">
-                <div class="sticker-logo">
-                    <div class="sticker-logo-icon"><i class="fas fa-bolt"></i></div>
-                    <div class="sticker-logo-text">Elektra<span>Serv</span></div>
-                </div>
-                <div class="sticker-tagline">Profesyonel Elektrik Makine Bakim Onarim</div>
-            </div>
-            <div class="sticker-body">
-                <div class="sticker-qr" id="qr1"></div>
-                <div class="sticker-info">
-                    <div class="sticker-info-item">
-                        <i class="fas fa-user"></i>
-                        <div class="info-text"><strong>Ulas Ilgar</strong></div>
-                    </div>
-                    <div class="sticker-info-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <div class="info-text"><strong>+90 (533) 030 03 83</strong></div>
-                    </div>
-                    <div class="sticker-info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div class="info-text">Kars ve Cevre Iller</div>
-                    </div>
-                    <div class="sticker-info-item">
-                        <i class="fas fa-cogs"></i>
-                        <div class="info-text">Motor, Jenerator, Trafo, Pano</div>
-                    </div>
-                </div>
-            </div>
-            <div class="sticker-footer">
-                <span class="sticker-footer-text">15+ Yillik Tecrube</span>
-                <span class="sticker-scan-label"><i class="fas fa-qrcode"></i> QR Okut</span>
-            </div>
-        </div>
-
-        <!-- Sticker 2: Compact style -->
-        <div class="sticker-compact">
-            <div class="compact-top">
-                <div class="compact-brand">
-                    <div class="compact-icon"><i class="fas fa-bolt"></i></div>
-                    <div class="compact-name">Elektra<span>Serv</span></div>
-                </div>
-                <div class="compact-badge">15+ Yil</div>
-            </div>
-            <div class="compact-body">
-                <div class="compact-qr" id="qr2"></div>
-                <div class="compact-details">
-                    <div class="compact-person">Ulas Ilgar</div>
-                    <div class="compact-row">
-                        <i class="fas fa-phone-alt"></i>
-                        +90 (533) 030 03 83
-                    </div>
-                    <div class="compact-row">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Kars ve Cevre Iller
-                    </div>
-                    <div class="compact-row">
-                        <i class="fas fa-cogs"></i>
-                        Elektrik Makine Bakim
-                    </div>
-                </div>
-            </div>
-            <div class="compact-bottom">
-                <i class="fas fa-qrcode"></i>
-                <span>QR Kodu Okutun - Iletisim Bilgileri</span>
-            </div>
-        </div>
-
-        <!-- Sticker 3: Mini QR -->
-        <div class="sticker-mini">
-            <div class="mini-header">
-                <div class="mini-logo">Elektra<span>Serv</span></div>
-            </div>
-            <div class="mini-body">
-                <div class="mini-qr" id="qr3"></div>
-                <div class="mini-phone">+90 (533) 030 03 83</div>
-                <div class="mini-label">QR Kodu Okutun</div>
-            </div>
-            <div class="mini-footer">Ulas Ilgar - Kars</div>
-        </div>
-
-        <!-- Sticker 4: Mini QR (duplicate for print) -->
-        <div class="sticker-mini">
-            <div class="mini-header">
-                <div class="mini-logo">Elektra<span>Serv</span></div>
-            </div>
-            <div class="mini-body">
-                <div class="mini-qr" id="qr4"></div>
-                <div class="mini-phone">+90 (533) 030 03 83</div>
-                <div class="mini-label">QR Kodu Okutun</div>
-            </div>
-            <div class="mini-footer">Ulas Ilgar - Kars</div>
-        </div>
+    <div class="controls">
+        <h1>ElektraServ - QR Sticker</h1>
+        <p>QR kodu okutarak iletisim sayfasina ulasabilirsiniz</p>
+        <button class="print-btn" onclick="window.print()">
+            <i class="fas fa-print"></i>
+            Yazdir
+        </button>
     </div>
 
-    <!-- Wide banner sticker -->
-    <div style="max-width: 800px; width: 100%; margin-top: 24px;">
-        <div class="sticker-banner">
-            <div class="banner-left">
-                <div class="banner-logo">
-                    <div class="banner-logo-icon"><i class="fas fa-bolt"></i></div>
-                    <div class="banner-logo-text">Elektra<span>Serv</span></div>
+    <div class="sticker">
+        <!-- Header -->
+        <div class="sticker-header">
+            <div class="logo-row">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <div class="logo-text">Elektra<span>Serv</span></div>
+            </div>
+            <div class="tagline">Elektrik Makine Bakim & Onarim</div>
+        </div>
+
+        <!-- Body -->
+        <div class="sticker-body">
+            <div class="qr-wrapper">
+                <div class="qr-box">
+                    <div id="qrcode"></div>
+                    <div class="qr-overlay"><i class="fas fa-bolt"></i></div>
                 </div>
-                <div class="banner-desc">Profesyonel elektrik makine bakim, onarim ve montaj hizmetleri. 15+ yillik tecrube ile garantili iscilik.</div>
-                <div class="banner-services">
-                    <span class="banner-service-tag">Elektrik Motorlari</span>
-                    <span class="banner-service-tag">Jenerator</span>
-                    <span class="banner-service-tag">Transformator</span>
-                    <span class="banner-service-tag">Pano Montaji</span>
-                    <span class="banner-service-tag">Test & Olcum</span>
+                <div class="scan-text">
+                    <i class="fas fa-camera"></i> QR Kodu Okutun
                 </div>
             </div>
-            <div class="banner-center">
-                <div class="banner-person">Ulas Ilgar</div>
-                <div class="banner-contact-row">
-                    <i class="fas fa-phone-alt"></i>
-                    +90 (533) 030 03 83
+
+            <div class="info-section">
+                <div class="person-name">Ulas Ilgar</div>
+
+                <div class="info-row">
+                    <div class="info-icon phone">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-text"><strong>+90 (533) 030 03 83</strong></div>
                 </div>
-                <div class="banner-contact-row">
-                    <i class="fab fa-whatsapp"></i>
-                    WhatsApp: +90 533 030 03 83
+
+                <div class="info-row">
+                    <div class="info-icon whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="info-text">WhatsApp ile Ulasin</div>
                 </div>
-                <div class="banner-contact-row">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Kars ve Cevre Iller
+
+                <div class="info-row">
+                    <div class="info-icon location">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-text">Kars ve Cevre Iller</div>
                 </div>
-                <div class="banner-contact-row">
-                    <i class="fas fa-clock"></i>
-                    7/24 Acil Servis
+
+                <div class="info-row">
+                    <div class="info-icon service">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-text">7/24 Acil Servis</div>
                 </div>
             </div>
-            <div class="banner-right">
-                <div class="banner-qr" id="qr5"></div>
-                <span class="banner-scan"><i class="fas fa-camera"></i> QR Kodu Okutun</span>
+        </div>
+
+        <!-- Footer -->
+        <div class="sticker-footer">
+            <div class="footer-services">
+                <span class="service-tag">Motor</span>
+                <span class="service-tag">Jenerator</span>
+                <span class="service-tag">Trafo</span>
+                <span class="service-tag">Pano</span>
+            </div>
+            <div class="footer-exp">
+                <i class="fas fa-shield-alt"></i>
+                15+ Yil Tecrube
             </div>
         </div>
     </div>
 
-    <!-- QR Code generation library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
-        // URL that QR code points to - contact page
-        const targetURL = 'https://elektrik-bakim-site.vercel.app/iletisim.html';
-
-        function generateQR(elementId, size) {
-            const el = document.getElementById(elementId);
-            if (!el) return;
-            new QRCode(el, {
-                text: targetURL,
-                width: size,
-                height: size,
-                colorDark: '#1a1a2e',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
-
-        // Generate QR codes for each sticker
-        generateQR('qr1', 200);
-        generateQR('qr2', 180);
-        generateQR('qr3', 220);
-        generateQR('qr4', 220);
-        generateQR('qr5', 200);
+        new QRCode(document.getElementById('qrcode'), {
+            text: 'https://elektrik-bakim-site.vercel.app/iletisim.html',
+            width: 256,
+            height: 256,
+            colorDark: '#1a1a2e',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
     </script>
 </body>
 </html>
